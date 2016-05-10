@@ -1,0 +1,124 @@
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% block viewport %}
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock %}
+
+    {% block favicon %}
+        <link rel="icon" href=favicon.ico">
+    {% endblock %}
+
+    <title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} | {% endif %}{% block head_title %}Pinna{% endblock %}{% endblock %}</title>
+
+    {% block style_base %}
+        <link href="{% static "pinna/css/custom.css" %}" rel="stylesheet">
+        <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+        <link href="{% static "pinna/css/dashboard.css" %}" rel="stylesheet">
+        <link href="{% static "font-awesome/css/font-awesome.css" %}" rel="stylesheet">
+        {% block extra_style %}{% endblock %}
+    {% endblock %}
+
+    {% block html5shiv %}
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% endblock %}
+
+  </head>
+
+  <body>
+    {% block navbar_fixed_top %}
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              {% block project_brand %}
+                <a class="navbar-brand" href="#">PINNA</a>
+              {% endblock %}
+
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+            {% block account_bar %}
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{ request.user.username }}
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url "account_password" %}"><i class="fa fa-user"></i> {% trans "Change Password" %}</a></li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="account_logout" href="{% url "account_logout" %}"><i class="fa fa-power-off"></i> {% trans "Log out" %}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url "pinna_login" %}">{% trans "Log in" %}</a></li>
+                    {% endif %}
+                </ul>
+            {% endblock %}
+              <!--form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+              </form -->
+            </div>
+            </div>
+        </nav>
+    {% endblock %}
+
+    <div class="container-fluid">
+      <div class="row">
+        {% block right_side_bar %}
+        {% endblock %}
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {% for message in messages %}
+            <div class="alert fade in {% if message.tags %} alert-{{ message.tags }}{% endif %}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% block body_base %}
+            <h2 class="page-header">{% block body_title %}{{ title }}{% endblock %}</h2>
+            {% block body %}
+            {% endblock %}
+        {% endblock %}
+
+        </div>
+      </div>
+    </div>
+
+    {% block script_base %}
+        <script src="{% block jquery_src %}{% static "jquery/js/jquery-2.1.1.min.js" %}{% endblock %}"></script>
+        <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+        <script src="{% static "pinax/js/docs.min.js" %}"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="{% static "pinna/js/ie10-viewport-bug-workaround.js" %}"></script>
+        {% block extra_script %}{% endblock %}
+    {% endblock %}
+
+    {% block extra_body_base %}
+        {% block extra_body %}{% endblock %}
+    {% endblock %}
+
+  </body>
+</html>

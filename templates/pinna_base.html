@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% load staticfiles %}
+{% load url from future %}
+{% load i18n %}
+
+{% block right_side_bar %}
+  <div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li class="{{ m1_active }}"><a href="{% url "home" %}">Overview</a></li>
+    <li class="{{ m2_active }}"><a href="{% url "station_manage_view" %}">Stations</a></li>
+    <li class="{{ m3_active }}"><a href="{% url "music_meta_view" %}">Music Meta</a></li>
+    <li class="{{ m4_active }}"><a href="{% url "track_manage_view" %}">Top Tracks</a></li>
+    <li class="{{ m5_active }}"><a href="{% url "ads_manage_view" %}">ADs</a></li>
+    <li class="{{ m6_active }}"><a href="{% url "settings_view" %}">Settings</a></li>
+    <li class="{{ m7_active }}"><a href="{% url "user_manage_view" %}">Users</a></li>
+  </ul>
+  </div>
+{% endblock %}

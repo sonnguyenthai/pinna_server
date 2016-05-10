@@ -1,0 +1,74 @@
+{% extends "pinna_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Top Tracks" %}{% endblock %}
+
+{% block extra_style %}
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block body_title %}{% trans "Top Tracks" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+            <table id="show_client" >
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>User</th>
+                    <th>Privacy</th>
+                    <th>Downloads</th>
+                    <th>Likes</th>
+                    <th>Purchases</th>
+                    <th>URL Valid Time (hrs)</th>
+                    <th>Date created</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td><a href="{{ item.url }}" >{{ item.name }}</a></td>
+                        <td>{{ item.user }}
+                        <td>{{ item.privacy }}</td>
+                        <td>{{ item.downloads }}</td>
+                        <td>{{ item.likes }}</td>
+                        <td>{{ item.purchases }}</td>
+                        <td>{{ item.url_time }}</td>
+                        <td>{{ item.date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+    <!--a href="{% url 'station_add_view' %}">
+        <button type="submit" class="btn btn-primary">Add New</button>
+    </a-->
+
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <!-- jQuery for DataTables-->
+    <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#show_client').dataTable({
+                //"processing": true,
+                //"serverSide": true,
+                //"ajax": "",
+               // "columnDefs": [ { "targets": 7, "orderable": false },
+               //                 { "targets": 8, "orderable": false } ],
+                "order": [[ 4, "desc" ], [ 5, "desc" ]]
+
+            });
+        });
+    </script>
+{% endblock %}

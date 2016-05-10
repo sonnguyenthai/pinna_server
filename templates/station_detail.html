@@ -1,0 +1,80 @@
+{% extends "pinna_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Station Detail" %}{% endblock %}
+
+{% block body_title %}{% trans "Station Detail" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs">
+
+            {% if station %}
+            <label class="control-label" for="id" >ID:</label>
+            <span class="" id="id" >{{ data.id }}</span>
+            <br />
+
+            <label class="control-label" for="name" >Name:</label>
+            <span class="" id="name" >{{ data.name }}</span>
+            <br />
+
+            <label class="control-label" for="num_tracks" >Number of Tracks:</label>
+            <span class="" id="num_tracks" >{{ data.num_tracks }}</span>
+            <br />
+
+            <label class="control-label" for="genre" >Genre:</label>
+            <span class="" id="genre" >{{ data.genre }}</span>
+            <br />
+
+            <label class="control-label" for="mood" >Mood:</label>
+            <span class="" id="mood" >{{ data.mood }}</span>
+            <br />
+
+            <label class="control-label" for="bpm" >Bpm:</label>
+            <span class="" id="bpm" >{{ data.bpm }}</span>
+            <br />
+
+            <label class="control-label" for="hashtags" >Hashtags:</label>
+            <span class="" id="hashtags" >{{ data.hashtags }}</span>
+            <br />
+
+            <label class="control-label" for="owner" >Owner:</label>
+            <span class="" id="owner" >{{ data.author }}</span>
+            <br />
+
+            <label class="control-label" for="owner_id" >Owner ID:</label>
+            <span class="" id="owner" >{{ data.owner_id }}</span>
+            <br />
+
+            <label class="control-label" for="num_subs" >Number of Subscribers:</label>
+            <span class="" id="num_subs" >{{ data.num_subscribers }}</span>
+            <br />
+
+            <label class="control-label" for="privacy" >Privacy Level:</label>
+            <span class="" id="privacy" >{{ data.privacy_level }}</span>
+            <br />
+
+            <label class="control-label" for="r_num_subs" >Recent number of Subscribers:</label>
+            <span class="" id="r_num_subs" >{{ data.recent_num_subscribers }}</span>
+            <br />
+
+            <label class="control-label" for="photo" >Photo:</label>
+            <span class="" id="photo" >{{ data.photo }}</span>
+            <br />
+
+            <label class="control-label" for="thumb" >Thumbnail:</label>
+            <span class="" id="thumb" >{{ data.thumbnail }}</span>
+            <br />
+
+            <label class="control-label" for="date_created" >Date Created:</label>
+            <span class="" id="date_created" >{{ date_created }}</span>
+            <br />
+            {% else %}
+                There is no station matched
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "pinna_base.html" %}
+
+{% load url from future %}
+{% load bootstrap %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Delete Confirmation" %}{% endblock %}
+
+{% block body_title %}{% trans "Delete Confirmation" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <form action="" method="post">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ object.name }}"?</p>
+            <input type="submit" class="btn btn-primary" value="Confirm" />
+        </form>
+    </div>
+{% endblock %}

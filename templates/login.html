@@ -1,0 +1,40 @@
+{% extends "site_base.html" %}
+
+{% load url from future %}
+{% load bootstrap %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Login" %}{% endblock %}
+
+{% block body_title %}{% trans "Login" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            <form method="POST" action="{% url "pinna_login" %}" autocapitalize="off"
+                    {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+                <legend>Log in</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                {% comment %}
+                <a href="{% url "account_password_reset" %}" class="btn btn-default">Forgot your password?</a>
+                {% endcomment %}
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            {% include "account/_login_sidebar.html" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_username').focus();
+        });
+    </script>
+{% endblock %}

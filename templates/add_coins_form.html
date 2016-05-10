@@ -1,0 +1,24 @@
+{% extends "pinna_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Add Coins" %}{% endblock %}
+
+{% block body_title %}{% trans "Add Coins" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-5">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <p class="text-info">
+                    These coins will be added to <strong>{{ user.username }}</strong> account
+                </p>
+                <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

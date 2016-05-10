@@ -1,0 +1,55 @@
+{% extends "pinna_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Manage Users" %}{% endblock %}
+
+{% block extra_style %}
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block body_title %}{% trans "Manage Users" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+            <table id="show_users" >
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Admin</th>
+                    <th>Display Name</th>
+                    <th>Coins</th>
+                    <th>Stations</th>
+                    <th>Tracks</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+            </table>
+
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <!-- jQuery for DataTables-->
+    <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#show_users').dataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{% url 'user_list_json' %}",
+                "columnDefs": [ { "targets": 3, "orderable": false },
+                                { "targets": 4, "orderable": false },
+                                { "targets": 5, "orderable": false },
+                                { "targets": 6, "orderable": false }
+                ]
+            });
+        });
+    </script>
+{% endblock %}

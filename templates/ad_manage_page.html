@@ -1,0 +1,51 @@
+{% extends "pinna_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Manage ADs" %}{% endblock %}
+
+{% block extra_style %}
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block body_title %}{% trans "Manage Ads" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+            <table id="show_ads" >
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Date created</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+            </table>
+
+    <a href="{% url 'ad_create_view' %}">
+        <button type="submit" class="btn btn-primary">Add New</button>
+    </a>
+
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <!-- jQuery for DataTables-->
+    <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#show_ads').dataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{% url 'ad_list_json' %}",
+                "columnDefs": [ { "targets": 3, "orderable": false } ]
+            });
+        });
+    </script>
+{% endblock %}

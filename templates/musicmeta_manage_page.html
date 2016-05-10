@@ -1,0 +1,61 @@
+{% extends "pinna_base.html" %}
+
+{% load url from future %}
+{% load bootstrap %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Manage Genres/Moods" %}{% endblock %}
+
+{% block extra_style %}
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block body_title %}{% trans "Manage Genres/Moods" %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+            <table id="show_client" >
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                {% for meta in metas %}
+                    <tr>
+                        <td>{{ meta.id }}</td>
+                        <td>{{ meta.name }}</td>
+                        <td>{{ meta.type }}</td>
+                        <td>
+                            <a href="{% url 'edit_music_meta_view' %}?id={{ meta.id }}">
+                                Edit
+                            </a>/
+                              <a href="{% url 'delete_music_meta_view' %}?id={{ meta.id }}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+    <a href="{% url 'add_music_meta_view' %}">
+        <button type="submit" class="btn btn-primary">Add New</button>
+    </a>
+
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <!-- jQuery for DataTables-->
+    <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#show_client').DataTable();
+        });
+    </script>
+{% endblock %}

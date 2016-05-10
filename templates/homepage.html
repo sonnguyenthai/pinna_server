@@ -1,0 +1,32 @@
+{% extends "pinna_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block head_title %}{% trans "Overview" %}{% endblock %}
+
+{% block body_title %}{% trans "Overview" %}{% endblock %}
+
+{% block body %}
+    <div class="row show-grid">
+        <div class="col-md-4">Number of Users:</div>
+        <div class="col-md-4">{{ users }}</div>
+    </div>
+
+    <div class="row show-grid">
+        <div class="col-md-4">Number of Tracks:</div>
+        <div class="col-md-4">{{ tracks }}</div>
+    </div>
+
+    <div class="row show-grid">
+        <div class="col-md-4">Number of Stations:</div>
+        <div class="col-md-4">{{ stations }}</div>
+    </div>
+
+    <div class="row show-grid">
+        <div class="col-md-4">Number of Playlists:</div>
+        <div class="col-md-4">{{ playlists }}</div>
+    </div>
+
+{% endblock %}
